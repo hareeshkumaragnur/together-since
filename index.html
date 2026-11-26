@@ -1,1 +1,111 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f4f1">
+<title>Together Since ❤️</title>
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f4f1;
+  font-family: Arial, sans-serif;
+  color: #403738;
+  padding: 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 380px;
+  background: #fffdfa;
+  border-radius: 25px;
+  padding: 40px 20px;
+  text-align: center;
+  box-shadow: 0 8px 30px #0000000d;
+}
+
+.heart { color: #b47783; font-size: 28px; }
+
+h2 {
+  font-size: 21px;
+  font-weight: 500;
+  margin: 15px 0 30px;
+}
+
+#time {
+  font-size: 27px;
+  font-weight: bold;
+  color: #80535d;
+  line-height: 1.6;
+}
+
+#days {
+  font-size: 17px;
+  margin-top: 15px;
+  color: #80535d;
+}
+
+#date {
+  font-size: 13px;
+  color: #999;
+  margin-top: 25px;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+  <div class="heart">♥</div>
+  <h2>Together Since</h2>
+
+  <div id="time"></div>
+  <div id="days"></div>
+  <div id="date">11 August 2024</div>
+</div>
+
+<script>
+function updateCounter() {
+  const start = new Date(2024, 7, 11);
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+
+  let years = now.getFullYear() - start.getFullYear();
+  let months = now.getMonth() - start.getMonth();
+  let days = now.getDate() - start.getDate();
+
+  if (days < 0) {
+    months--;
+    days += new Date(
+      now.getFullYear(), now.getMonth(), 0
+    ).getDate();
+  }
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  const totalDays = Math.floor(
+    (now - start) / 86400000
+  );
+
+  document.getElementById("time").textContent =
+    `${years} Years · ${months} Months · ${days} Days`;
+
+  document.getElementById("days").textContent =
+    `${totalDays.toLocaleString()} Days Together`;
+}
+
+updateCounter();
+setInterval(updateCounter, 60000);
+</script>
+</body>
+</html>
+
